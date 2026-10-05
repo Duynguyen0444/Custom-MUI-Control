@@ -2,10 +2,19 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import './index.css'
 import App from './App.tsx'
 import { theme } from './theme.ts'
+
+// Lowercase section placeholders so empty date fields read dd/mm/yyyy
+const pickerLocaleText = {
+  fieldDayPlaceholder: () => 'dd',
+  fieldMonthPlaceholder: () => 'mm',
+  fieldYearPlaceholder: (params: { digitAmount: number }) => 'y'.repeat(params.digitAmount),
+}
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,8 +37,10 @@ enableMocking().then(() => {
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <App />
+          <LocalizationProvider dateAdapter={AdapterDayjs} localeText={pickerLocaleText}>
+            <CssBaseline />
+            <App />
+          </LocalizationProvider>
         </ThemeProvider>
       </QueryClientProvider>
     </StrictMode>,

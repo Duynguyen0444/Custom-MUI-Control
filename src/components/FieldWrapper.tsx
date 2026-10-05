@@ -7,6 +7,7 @@ import type { ReactNode } from "react";
 type FieldWrapperProps = {
   label?: ReactNode;
   htmlFor?: string;
+  labelId?: string;
   required?: boolean;
   disabled?: boolean;
   errorMessage?: string;
@@ -16,6 +17,7 @@ type FieldWrapperProps = {
 export function FieldWrapper({
   label,
   htmlFor,
+  labelId,
   required,
   disabled,
   errorMessage,
@@ -26,6 +28,7 @@ export function FieldWrapper({
       {label && (
         <FormLabel
           htmlFor={htmlFor}
+          id={labelId}
           disabled={disabled}
           sx={{
             display: "block",

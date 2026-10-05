@@ -3,4 +3,7 @@ export const FIELD_KIND = {
 	Textarea: 'textarea',
 	Select: 'select',
 	RemoteAutocomplete: 'remote-autocomplete',
+	Radio: 'radio',
+	Date: 'date',
+	Group: 'group',
 } as const;
